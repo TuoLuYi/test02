@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.dao.StudentDao"> 
+
+ 	
+ 	<!-- 动态查询    -->
+ 	<select id="getListDynamic" resultType="com.xx.bean.Student" parameterType="com.xx.bean.Student">
+ 		select * from student 
+ 		<where>
+ 			<if test="stmz != null and stmz != ''">
+ 				and stmz = #{stmz}
+ 			</if>
+ 			<if test="stdh != null and stdh != ''">
+ 				and stdh = #{stdh}
+ 			</if>
+ 			<if test="stsf != null and stsf != ''">
+ 				and stsf = #{stsf}
+ 			</if>
+ 		</where>
+ 	</select>
+  
+</mapper>
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.js" ></script>
+</head>
+<body>
+    <div class="wrap login">
+    	<div class="log_banner"><img src="img/dog.png"/></div>
+    	<form id="fm" >
+    		<div class="yhmm">
+    			<label><i>&#xe657;</i></label><input type="text" name="stmz" placeholder="请输入手机号"/> 
+    		</div>
+    		<div class="yhmm">
+    			<label><i>&#xe66b;</i></label><input type="text" name="stmm" placeholder="请输入密码"/> 
+    		</div>
+    		<div class="wj">
+    			<a class="wjmm" href="zhmm.html">忘记密码？</a>
+    		</div>
+    		<div class="dl" style="margin-top:35px">
+    			<a id="denglu" class="tjan" href="javascript:">登录</a>
+    		</div>
+    		<div class="qx" style="margin-top:10px">
+    			<a class="tjan" href="regist.html">注册</a>
+    		</div>
+    	</form>
+    </div>
+    
+     <script type="text/javascript" src="/jx/back/custom/green/jquery.min.js"></script>
+    <script type="text/javascript" src="/jx/back/custom/green/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/jx/back/custom/green/easyui-lang-zh_CN.js"></script>
+
+    
+    <script type="text/javascript">
+    		
+	    $('#denglu').on('click', function() {
+	    	
+	    	$('#fm').form('submit',{
+				url: "/jx/studentq/loginst.do",
+				onSubmit: function(){ 
+					 
+				},
+				success: function(result){ 
+					var ob = JSON.parse(result);//字符串转json
+				 
+					if (ob.code>0){
+						 alert("登录成功！")
+						 window.location.href="index.html";
+					} else { 
+						 alert("登录失败！")
+						 
+					}
+				}
+			});
+	    
+	    })
+    </script>
+    
+</body>
+</html>

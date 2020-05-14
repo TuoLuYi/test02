@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.xx.dao.WorktimeDao"> 
+
+	<insert id="add" parameterType="com.xx.bean.Worktime"> 
+		insert into Worktime
+		(teid,wtsj,wtsx,wtrs) values 
+ 		(#{teid},#{wtsj},#{wtsx},#{wtrs})
+	</insert> 
+
+	<delete id="delete" parameterType="int"> 
+		delete from Worktime where 
+		wtid = #{wtid} 
+	</delete> 
+
+	<update id="update" parameterType="com.xx.bean.Worktime"> 
+		update Worktime 
+		 <set>
+			<if test="wtid != null and wtid != '' "> 
+				 wtid = #{wtid} ,
+			</if> 
+			<if test="teid != null and teid != '' "> 
+				 teid = #{teid} ,
+			</if> 
+			<if test="wtsj != null and wtsj != '' "> 
+				 wtsj = #{wtsj} ,
+			</if> 
+			<if test="wtsx != null and wtsx != '' "> 
+				 wtsx = #{wtsx} ,
+			</if> 
+			<if test="wtrs != null and wtrs != '' "> 
+				 wtrs = #{wtrs} ,
+			</if> 
+			</set>
+		where wtid = #{wtid} 
+	</update> 
+
+	<select id="getList" parameterType="com.xx.bean.Worktime" resultType="com.xx.bean.Worktime">
+		select * from Worktime
+		<where> 
+			<if test="wtid != null and wtid != '' "> 
+				and wtid = #{wtid} 
+			</if> 
+			<if test="teid != null and teid != '' "> 
+				and teid = #{teid} 
+			</if> 
+			<if test="wtsj != null and wtsj != '' "> 
+				and wtsj = #{wtsj} 
+			</if> 
+			<if test="wtsx != null and wtsx != '' "> 
+				and wtsx = #{wtsx} 
+			</if> 
+			<if test="wtrs != null and wtrs != '' "> 
+				and wtrs = #{wtrs} 
+			</if>
+		</where> 
+	</select> 
+	 
+	<select id="getListByTeWo" resultType="map"  parameterType="map">
+		select wtid, t.teid,temz,tedh,wtsj,wtsx from teacher t ,worktime w  where t.teid = w.teid
+		 
+			<if test="temz != null and temz != '' "> 
+				and  temz = #{temz} 
+			</if> 
+			<if test="teid != null and teid != '' "> 
+				and t.teid = #{teid} 
+			</if> 
+			<if test="wtsj != null and wtsj != '' "> 
+				and wtsj = #{wtsj} 
+			</if> 
+			<if test="wtsx != null and wtsx != '' "> 
+				and wtsx = #{wtsx} 
+			</if> 
+		 
+	</select>
+ 	
+ 	<select id="getFreeTeacher" parameterType="String" resultType="teacher">
+ 	
+ 		select t.* from teacher t ,worktime w
+			where t.teid = w.teid 
+			and wtsj =#{wtsj} 
+			and wtsx='是'
+			and wtrs>0
+ 		
+ 	
+ 	</select>
+	
+	
+
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.xx.dao.ManagerDao"> 
+
+	<insert id="add" parameterType="com.xx.bean.Manager"> 
+		insert into Manager
+		(glmz,glmm) values 
+ 		(#{glmz},#{glmm})
+	</insert> 
+
+	<delete id="delete" parameterType="int"> 
+		delete from Manager where 
+		glid = #{glid} 
+	</delete> 
+
+	<update id="update" parameterType="com.xx.bean.Manager"> 
+		update Manager set 
+		glmz = #{glmz},
+		glmm = #{glmm}
+		where glid = #{glid} 
+	</update> 
+
+	<select id="getList" parameterType="com.xx.bean.Manager" resultType="com.xx.bean.Manager">
+		select *from Manager
+		<where> 
+			<if test="glid != null and glid != '' "> 
+				and glid = #{glid} 
+			</if> 
+			<if test="glmz != null and glmz != '' "> 
+				and glmz = #{glmz} 
+			</if> 
+			<if test="glmm != null and glmm != '' "> 
+				and glmm = #{glmm} 
+			</if> 
+		</where> 
+	</select> 
+
+</mapper>

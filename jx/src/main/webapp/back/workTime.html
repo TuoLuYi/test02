@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>供应商列表</title>
+
+<link href="static/green/css/base.css" rel="stylesheet">
+<link rel="stylesheet" href="custom/green/uimaker/easyui.css">
+<link rel="stylesheet" type="text/css" href="custom/green/uimaker/icon.css">
+<link rel="stylesheet" href="static/green/css/providers1.css">
+ <link rel="stylesheet" href="static/mycss.css">
+</head>
+<body>
+    <div class="container">
+    	<!-- 表格区域 -->
+       <table id="dg" style="width:100%;height:529px" title="全体供应商列表">
+            
+        </table>
+        <!-- 表格区域 -->
+        
+        <!-- 表单区域 -->
+      <div id="tb" style="padding:0 30px;">
+          <form id="searchform" method="post">
+		        <div class="conditions">
+		            <span class="con-span">教练名字: </span>
+		            
+		             <select name="teid" class="easyui-combobox" style="width: 126px;" 
+                          data-options="
+                          panelHeight:'auto',
+                          valueField:'teid',
+                          textField:'temz',
+                          url:'/jx/teacher/getList.do'" style="width: 126px; height:40px" >
+                          
+					</select>
+		            
+		            
+		            <span class="con-span">时间: </span><input class="easyui-datetimebox" type="text"   name="wtsj" style="width:116px;height:35px;line-height:35px;"></input>
+		            <a id="submit_search"   class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a>
+		            <a id="submit_chongzhi"   class="easyui-linkbutton" iconCls="icon-reload">重置</a>
+		            <a href="#" class="easyui-linkbutton more" iconCls="icon-more">更多</a>
+		        </div>
+		     	<div class="conditions hide">
+		            <span class="con-span">是否上班: </span>
+					<select class="easyui-combobox" name="wtsx" style="height:35px;width:166px;">
+					
+					<option value=""></option>
+					<option value="是">是 </option>
+					<option value="否">否 </option>
+					
+					</select>
+
+		           
+		        </div>
+		         
+		        <div class="opt-buttons">
+		           
+		            <a href="#" class="easyui-linkbutton shangban">上班</a> 
+		            <a href="#" class="easyui-linkbutton xiuban">休班</a> 
+		        </div>
+        	</form>
+        
+      </div>
+       <!-- 表单区域 -->
+      
+      
+       <!-- 添加隐藏区域 -->
+      <div id="add" title="新增表单" style="width:718px; OVERFLOW-Y: auto; OVERFLOW-X:hidden; height:100%;display: none;">
+     	
+     	
+     	
+     	 <form id="fm" method="post"  >
+		        <div class="jq-form">
+		          <div class="jq-form-row clearfix">
+		            <label>用户名称：</label>
+		            <div class="jq-form-control">
+		              <input name="yhmz" class="jq-form-input"   type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		          <div class="jq-form-row clearfix even">
+		            <label>密码：</label>
+		            <div class="jq-form-control">
+		              <input name="yhmm" class="jq-form-input"   type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		          
+		          <div class="jq-form-row clearfix">
+		            <label>性别：</label>
+		            <div class="jq-form-control">
+		              <select name="yhxb" class="jq-form-input">
+		                <option value="男">男</option>
+		                <option value="女">女</option>  
+		              </select>
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		          
+		           <div class="jq-form-row clearfix even">
+		            <label>余额：</label>
+		            <div class="jq-form-control">
+		              <input name="yhye" class="jq-form-input"   type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		           <div class="jq-form-row clearfix ">
+		            <label>用户积分：</label>
+		            <div class="jq-form-control">
+		              <input name="yhjf" class="jq-form-input"  type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		           
+          </form>
+          <div class="jq-form-row clearfix jq-form-submit">
+            <div class="jq-form-control">
+              <a  onclick="save()" class="easyui-linkbutton" data-options="selected:true">确定</a>
+              <a   onclick="$('#add').dialog('close')" class="easyui-linkbutton">关闭</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+       <!-- 添加隐藏区域 -->
+    <script type="text/javascript" src="custom/green/jquery.min.js"></script>
+    <script type="text/javascript" src="custom/green/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="custom/green/easyui-lang-zh_CN.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript">
+   
+ 			// 数据绑定到表格  这里的id对应table中的id
+	    $('#dg').datagrid({
+		    url:'/jx/workTime/getList.do', 
+		    toolbar:'#tb',//把id 为tb 绑定到表格上面
+			pagination:'true',//支持分页
+			rownumbers:'true',//支持显示每页条数
+			fitColumns:'true', //自动适应列宽
+			singleSelect:'true',// 只能选择一行
+			queryParams: formtojson('searchform'),//要向后台提交的  查询参数  formtojson('searchform')是个方法，看下面
+			//可以写{key:value的方式}  例如：queryParams: {'name':'aa','nl':12}
+		    
+		    //绑定表单中的列
+		    columns:[[
+					{field:'wtid',title:'wtid', hidden: true},
+					{field:'teid',title:'teid',hidden: true},
+					{field:'temz',title:'教练名',width:100  },
+					{field:'tedh',title:'电话',width:100 },  
+					{field:'wtsj',title:'时间',width:100 },
+					{field:'wtrs',title:'可预约人数',width:100 },
+					{field:'wtsx',title:'是否上班',width:100 } 
+				
+		    ]]
+		});
+ 			
+ 		var url; //用于临时存储访问后台数据的请求路径	
+ 			
+       
+		
+       
+
+        $(".more").click(function(){
+            $(this).closest(".conditions").siblings().toggleClass("hide");
+        });
+        
+        
+      //搜索按钮绑定的事件
+		 $("#submit_search").click(function () {
+            $('#dg').datagrid({ queryParams: formtojson("searchform") });   //点击搜索
+        });
+		
+		 $("#submit_chongzhi").click(function () {
+				$('#searchform').form('clear');    
+            $('#dg').datagrid({ queryParams: formtojson("searchform") });  
+        });
+        
+		 
+		 $('.shangban').on('click', function() {
+	        	var row = $('#dg').datagrid('getSelected');//获取当前用户选中的行
+				if (row){
+					url = '/jx/workTime/update.do?wtid='+row.wtid+'&wtsx=是';
+					
+					$.messager.confirm('确认按钮','你确定要修改该数据?',function(r){
+						if (r){
+							$.post(url ,function(result){
+								 
+								if (result.code>0){
+									$.messager.alert('修改结果','成功');
+									$('#dg').datagrid('reload');	 
+								} else {
+									$.messager.alert('修改结果','失败');
+								}
+							},'json');
+						}
+					});
+				}else{
+					$.messager.alert('提示','请选择一行再执行修改');
+				}
+	           
+	         
+	        })
+		  $('.xiuban').on('click', function() {
+	        	var row = $('#dg').datagrid('getSelected');//获取当前用户选中的行
+				if (row){
+					url = '/jx/workTime/update.do?wtid='+row.wtid+'&wtsx=否';
+					
+					$.messager.confirm('确认按钮','你确定要修改该数据?',function(r){
+						if (r){
+							$.post(url ,function(result){
+								 
+								if (result.code>0){
+									$.messager.alert('修改结果','成功');
+									$('#dg').datagrid('reload');	 
+								} else {
+									$.messager.alert('修改结果','失败');
+								}
+							},'json');
+						}
+					});
+				}else{
+					$.messager.alert('提示','请选择一行再执行修改');
+				}
+	           
+	         
+	        })
+		 
+        
+        //自动获取表单数据 并序列化数据  转成json格式
+        function formtojson(id) {
+		   
+	        var arr = $("#" + id).serializeArray()
+	        var jsonStr = "";
+	
+	        jsonStr += '{';
+	        for (var i = 0; i < arr.length; i++) {
+	            jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+	        }
+	        jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+	        jsonStr += '}'
+	      	  
+	        var json = JSON.parse(jsonStr)
+	       
+	        return json
+	    }
+        
+        
+    </script>
+</body>
+</html>

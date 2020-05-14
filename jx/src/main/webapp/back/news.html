@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>供应商列表</title>
+
+<link href="static/green/css/base.css" rel="stylesheet">
+<link rel="stylesheet" href="custom/green/uimaker/easyui.css">
+<link rel="stylesheet" type="text/css" href="custom/green/uimaker/icon.css">
+<link rel="stylesheet" href="static/green/css/providers1.css">
+ <link rel="stylesheet" href="static/mycss.css">
+</head>
+<body>
+    <div class="container">
+    	<!-- 表格区域 -->
+       <table id="dg" style="width:100%;height:529px" title="全体供应商列表">
+            
+        </table>
+        <!-- 表格区域 -->
+        
+        <!-- 表单区域 -->
+      <div id="tb" style="padding:0 30px;">
+          <form id="searchform" method="post">
+		        <div class="conditions">
+		            <span class="con-span">公告标题: </span>
+		            <input class="easyui-textbox" type="text" name="nebt" style="width:166px;height:35px;line-height:35px;"></input>
+		            
+		            <span class="con-span">公告时间: </span>
+		            <input class="easyui-textbox" type="text" name="nesj" style="width:166px;height:35px;line-height:35px;"></input>
+		            
+		            <a id="submit_search"   class="easyui-linkbutton" iconCls="icon-search" data-options="selected:true">查询</a>
+		            <a id="submit_chongzhi"   class="easyui-linkbutton" iconCls="icon-reload">重置</a>
+		            <a href="#" class="easyui-linkbutton more" iconCls="icon-more">更多</a>
+		        </div>
+		     	<div class="conditions hide">
+		            <span class="con-span">公告内容: </span>
+		            <input class="easyui-textbox" type="text" name="nenr" style="width:166px;height:35px;line-height:35px;"></input>
+		        </div>
+		         
+		        <div class="opt-buttons">
+		            <a href="#" class="easyui-linkbutton add-row" data-options="selected:true">新增</a>
+		            <a href="#" class="easyui-linkbutton delete-row">删除</a>
+		            <a href="#" class="easyui-linkbutton update-row">修改</a> 
+		        </div>
+        	</form>
+        
+      </div>
+       <!-- 表单区域 -->
+      
+      
+       <!-- 添加隐藏区域 -->
+      <div id="add" title="新增表单" style="width:718px; OVERFLOW-Y: auto; OVERFLOW-X:hidden; height:100%;display: none;">
+     	
+     	
+     	
+     	 <form id="fm" method="post"  >
+		        <div class="jq-form">
+		        
+		          <div class="jq-form-row clearfix">
+		            <label>公告标题：</label>
+		            <div class="jq-form-control">
+		              <input name="nebt" class="jq-form-input"   type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		          
+		          <div class="jq-form-row clearfix even">
+		            <label>公告内容：</label>
+		            <div class="jq-form-control">
+		              <input name="nenr" class="jq-form-input"   type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		          
+		           <div class="jq-form-row clearfix even">
+		            <label>公告时间：</label>
+		            <div class="jq-form-control">
+		              <input name="nesj" class="jq-form-input"   type="text" />
+		            </div>
+		            <span class="jq-form-tip">
+		              <span class="important">&nbsp;*&nbsp;</span>请严格填写
+		            </span>
+		          </div>
+		           
+          </form>
+          <div class="jq-form-row clearfix jq-form-submit">
+            <div class="jq-form-control">
+              <a  onclick="save()" class="easyui-linkbutton" data-options="selected:true">确定</a>
+              <a   onclick="$('#add').dialog('close')" class="easyui-linkbutton">关闭</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+       <!-- 添加隐藏区域 -->
+    <script type="text/javascript" src="custom/green/jquery.min.js"></script>
+    <script type="text/javascript" src="custom/green/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="custom/green/easyui-lang-zh_CN.js"></script>
+
+
+
+
+
+
+    <script type="text/javascript">
+   
+ 			// 数据绑定到表格  这里的id对应table中的id
+	    $('#dg').datagrid({
+		    url:'/jx/news/getList.do', 
+		    toolbar:'#tb',//把id 为tb 绑定到表格上面
+			pagination:'true',//支持分页
+			rownumbers:'true',//支持显示每页条数
+			fitColumns:'true', //自动适应列宽
+			singleSelect:'true',// 只能选择一行
+			queryParams: formtojson('searchform'),//要向后台提交的  查询参数  formtojson('searchform')是个方法，看下面
+			//可以写{key:value的方式}  例如：queryParams: {'name':'aa','nl':12}
+		    
+		    //绑定表单中的列
+		    columns:[[
+					{field:'neid',title:'neid', hidden: true},
+					{field:'nebt',title:'标题',width:100},
+					{field:'nenr',title:'内容',width:100},
+					{field:'nesj',title:'时间',width:100 }, 
+				
+		    ]]
+		});
+ 			
+ 		var url; //用于临时存储访问后台数据的请求路径	
+ 			
+       
+        $('.add-row').on('click', function() {
+          $('#add').dialog({
+              cache: false,
+              modal: true
+          }); 
+          url = '/jx/news/add.do';
+          $('#fm').form('clear');  
+        })
+        
+         $('.update-row').on('click', function() {
+	          
+			
+	          var row = $('#dg').datagrid('getSelected');//获取用户选中的行
+	          //如果选了
+			  if (row){
+				  $('#add').dialog({
+		              cache: false,
+		              modal: true
+		          }); 
+				  $('#fm').form('load',row);//表单回填数据
+				  
+				  url = '/jx/news/update.do?neid='+row.neid; 
+		          
+			  }else{//没有选中
+				  $.messager.alert('提示','请选择一行再执行修改操作');
+			  }
+	          
+        })
+        function save(){
+			$('#fm').form('submit',{
+				url: url,
+				onSubmit: function(){//提交之前校验表单
+					return $(this).form('validate');
+				},
+				success: function(result){ 
+					var ob = JSON.parse(result);//字符串转json
+				 
+					if (ob.code>0){
+						$.messager.alert('操作结果','成功');
+						$('#add').dialog('close')// 关闭弹出来的框框
+						$('#dg').datagrid('reload');	// 重新加载table中的数据
+					} else { 
+						$.messager.alert('操作结果','失败');
+					}
+				}
+			});
+		}
+
+        $('.delete-row').on('click', function() {
+        	var row = $('#dg').datagrid('getSelected');//获取当前用户选中的行
+			if (row){
+				url = '/jx/news/delete.do?neid='+row.neid;
+				
+				$.messager.confirm('确认按钮','你确定要删除该数据?',function(r){
+					if (r){
+						$.post(url ,function(result){
+							 
+							if (result.code>0){
+								$.messager.alert('删除结果','成功');
+								$('#dg').datagrid('reload');	 
+							} else {
+								$.messager.alert('删除结果','失败');
+							}
+						},'json');
+					}
+				});
+			}else{
+				$.messager.alert('提示','请选择一行再执行删除');
+			}
+           
+         
+        })
+
+       
+
+        $(".more").click(function(){
+            $(this).closest(".conditions").siblings().toggleClass("hide");
+        });
+        
+        
+      	//搜索按钮绑定的事件
+		$("#submit_search").click(function () {
+            $('#dg').datagrid({ queryParams: formtojson("searchform") });   //点击搜索
+        });
+		
+		$("#submit_chongzhi").click(function () {
+			$('#searchform').form('clear');    
+            $('#dg').datagrid({ queryParams: formtojson("searchform") });  
+        });
+        
+        
+        //自动获取表单数据 并序列化数据  转成json格式
+        function formtojson(id) {
+		   
+	        var arr = $("#" + id).serializeArray()
+	        var jsonStr = "";
+	
+	        jsonStr += '{';
+	        for (var i = 0; i < arr.length; i++) {
+	            jsonStr += '"' + arr[i].name + '":"' + arr[i].value + '",'
+	        }
+	        jsonStr = jsonStr.substring(0, (jsonStr.length - 1));
+	        jsonStr += '}'
+	      	  
+	        var json = JSON.parse(jsonStr)
+	       
+	        return json
+	    }
+        
+        
+    </script>
+</body>
+</html>

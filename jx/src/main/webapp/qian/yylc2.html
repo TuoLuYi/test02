@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.js" ></script>
+    <script type="text/javascript" src="js/srz.js"></script>
+</head>
+<body>
+	<div class="wrap">
+		<!--顶部-->
+	    <div class="top_fixed">
+	    	<a href="javascript:window.history.back()" class="left_btn"><i>&#xe622;</i></a>
+	    	<h1>选择时间</h1>
+	    	<!--<input type="search" placeholder="请输入服务项目"/>
+	    	<i class="sr">&#xe620;</i>-->
+	    	<a href="javascript:;" class="right_btn hide">预约</a>
+	    </div>
+	    
+	    <!--底部-->
+	    <div class="footer">
+      	   <a class="next" href="javascript:xyb()">下一步</a>
+       </div>
+	    
+	    <div class="container pd">
+	    	 <div class="main">
+			     <ul class="lc_list">
+				    <li class="lc_his"><a href="#">1</a><p>联系方式</p><li>
+					<li class="lc_lineon"><li>
+					<li class="lc_on"><a href="#">2</a><p>选择时间</p><li>
+					<li class="lc_line"><li>
+					<li class="lc"><a href="#">3</a><p>服务人员</p><li>
+					<li class="lc_line"><li>
+					<li class="lc"><a href="#">4</a><p>确认订单</p><li>
+				 </ul>
+			     <div  class="gdxx_bd">
+			    
+			     <ul class="sjlist" id="rq" >
+				    
+				 </ul>
+				 
+				</div>
+				
+				<p class="dts">提示：画线时段代表该时段预约已满或暂时不接受预约！</p>
+				
+			  </div>
+			</div>
+
+</body>
+</html>
+<script>
+			today = new Date().getTime()
+			
+			for (var i = 0; i < 30; i++) {
+				lastDay = getTimeByDay(i+1)  
+				lastTime1 = getnyr(lastDay)//2019-01-01
+				lastTime2 = getyrz(lastDay)//01-01-周几
+			 
+				$("#rq").append("<li class='sj_on' nian='"+lastTime1+"'  ><a  href='javascript:'>"+lastTime2+"</a></li>")
+			 
+			}
+ 			var sj;
+			 
+			
+			 //on方法要先找到原选择器（p),再找到动态添加的选择器（.new)
+			  $("#rq").on("click",".selected",function(){
+			　　　 	aa = $(this).attr("nian");
+			　　　 	console.log(aa)
+			　　　 	sj = aa;
+			  });
+			
+			
+			
+			function xyb(){
+				window.location.href="yylc3.html?riqi="+sj;
+				
+			}
+
+</script>
+
+
+<script type="text/javascript">
+    $(function(){
+			var $ul = $('ul.sjlist');		
+			$('.sjlb>li').click(function(){
+				var $this = $(this);
+				var $t = $this.index();
+				var length = $('.sjlb>li').length;
+				var index = $this.index();
+				var startindex = index-1;
+				if(index<2){
+					startindex = 0;
+				}
+				if(index>4){
+					startindex = 4;
+				}
+				$('.sjlb>li').hide();
+				var j=0;
+				var $obj = null;
+				var $a = null;
+				for(i=startindex;i<startindex+3;i++){
+					$obj = $('.sjlb>li:eq('+i+')');
+					$obj.show();
+					
+					if(startindex>0 && j==0){
+						$a = $obj.find('a');
+						
+						var yz = $a.html();
+						
+						var rz = '&lt;&nbsp;'+yz.replace('&lt;&nbsp;','');
+						$a.html(rz);
+					}else if(j==1){
+						$a = $obj.find('a');
+						var yz = $a.html();
+						var rz = yz.replace('&lt;&nbsp;','');
+						rz = rz.replace('&nbsp;&gt;','');
+						$a.html(rz);
+					}else if(startindex<4 && j==2){
+						
+						$a = $obj.find('a');
+						
+						var yz = $a.html();
+						
+						var rz = yz.replace('&nbsp;&gt;','')+'&nbsp;&gt;';
+						$a.html(rz);
+					}
+
+					j++;
+				}
+				$('li.now').removeClass();
+				$this.addClass('now');
+				$ul.hide();
+				$ul.eq($t).show();
+			});
+			$('.sjlb>li:eq(1)').click();
+			$('.sj_on').click(function(){
+				var $this = $(this);
+				var date_time = $this.attr('data-date-time');
+				$('#date_time').val(date_time);
+				$('.sj_on').removeClass('selected');
+				$this.addClass('selected');
+			});
+}); 
+</script>

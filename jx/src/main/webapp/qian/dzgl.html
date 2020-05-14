@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.js" ></script>
+</head>
+<body>
+	<div class="wrap">
+		<!--顶部-->
+	    <div class="top_fixed">
+	    	<a href="javascript:window.history.back()" class="left_btn"><i>&#xe622;</i></a>
+	    	<h1>地址管理</h1>
+	    	<a href="add_dz.html" class="right_btn">新增</a>
+	    </div>
+	    
+	  
+	    
+	    <div class="container">
+	    	 <div class="main">
+			     <div  class="gdxx_bd">
+			          <ul class="dz_list">
+					      <li class="xz"><input type="radio" name="dz"/> 
+					        <div class="dzcheck"><label><a href="#"><img src="img/chec.png"/></a></label></div>
+					        <div class="dz_text">
+					         <p><span class="name">陈伟</span><span class="tel">15807197602</span></p>
+					         <p><span class="addr">北京市丰台区星火科技大厦1212</span></p>
+					        </div>
+					        <div class="del"><label><a href="#"><img src="img/scdz.png"/></a></label></div>
+					      </li>
+					      <li><input type="radio" name="dz"/> 
+					        <div class="dzcheck"><label><a href="#"><img src="img/chec.png"/></a></label></div>
+					        <div class="dz_text">
+					         <p><span class="name">陈伟</span><span class="tel">15807197602</span></p>
+					         <p><span class="addr">北京市丰台区星火科技大厦1212</span></p>
+					        </div>
+					        <div class="del"><label><a href="#"><img src="img/scdz.png"/></a></label></div>
+					      </li>
+					      <li><input type="radio" name="dz"/> 
+					        <div class="dzcheck"><label><a href="#"><img src="img/chec.png"/></a></label></div>
+					        <div class="dz_text">
+					         <p><span class="name">陈伟</span><span class="tel">15807197602</span></p>
+					         <p><span class="addr">北京市丰台区星火科技大厦1212</span></p>
+					        </div>
+					        <div class="del"><label><a href="#"><img src="img/scdz.png"/></a></label></div>
+					      </li>
+					</ul>		
+				</div>
+			</div>
+	    </div>
+
+</body>
+
+<script>
+	$(function(){
+         $(".dz_list").on("click",".dzcheck,.dz_text",function(){
+         	 var sb= $(this).siblings("input").prop("checked");
+         	 $("input[name=dz]").prop("checked",false);
+         	 $(".dzcheck img").attr("src","img/chec.png");
+         	 $(".dz_list li").removeClass("xz")
+         	 if(!sb){
+         	 	$(this).parent().find(".dzcheck img").attr("src","img/checked.png");
+         	 	$(this).siblings("input").prop("checked",true);
+         	 	$(this).parents(".dz_list li").addClass("xz")
+         	 }else{
+         	 	$(this).parent().find(".dzcheck img").attr("src","img/chec.png");
+         	 	$(this).siblings("input").prop("checked",false);
+         	 	$(this).parents(".dz_list li").removeClass("xz")
+         	 }
+         	 console.log($(this).siblings("input").prop("checked"))
+         })
+         $(".dz_list").on("click",".del",function(){
+         	 var that=this;
+         	 zz({"info":"确定删除该地址？","txt1":"确定","txt2":"取消"})
+         	 $(".btns a").click(function(){
+         	 	var index=$(this).index();
+         	 	if(index==0){
+         	 	   $(that).parents(".dz_list li").remove();
+         	    }
+         	 	$(".zz").remove()
+         	 })
+         	 
+         })
+	})
+</script>
+</html>

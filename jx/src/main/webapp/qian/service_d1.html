@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.js" ></script>
+</head>
+<body>
+	<div class="wrap">
+		<!--顶部-->
+	    <div class="top_fixed">
+	    	<a href="javascript:window.history.back()" class="left_btn"><i>&#xe622;</i></a>
+	    	<h1>服务详情</h1>
+	    	<!--<input type="search" placeholder="请输入服务项目"/>
+	    	<i class="sr">&#xe620;</i>-->
+	    	<a href="yylc1.html" class="right_btn">预约</a>
+	    </div>
+	    
+	  
+	    
+	    <div class="container">
+	    	<ul class="service_list">
+	    	   <li class="bgwhite">
+	    		  <a href="javascript:;">
+	    		  	<img src="img/dog.png" />
+	    		  	<div>
+	    		  		<h3>科目二</h3>
+	    		  		<p class="service_time">服务时间:<span>一天</span></p>
+	    		  		<p class="service_price">服务价格:<span>最低￥80起</span></p>
+	    		  	</div>
+	    		  </a>
+	    	   </li>
+	    	</ul>
+	    	
+	    	<ul class="tabs">
+	    		<li class="on"><a href="javascript:;">服务内容</a></li>
+	    		<li><a href="javascript:;">适用</a></li>
+	    		<li><a href="javascript:;">服务范围</a></li>
+	    	</ul>
+	    	<ul class="content">
+	    		<li style="display:block">一、考试内容
+科目二考试内容包括：
+（一）大型客车、牵引车、城市公交车、中型客车、大型货车考试桩考、坡道定点停车和起步、侧方停车、
+通过单边桥、曲线行驶、直角转弯、通过限宽门、通过连续障碍、起伏路行驶、窄路掉头，以及模拟高速公路、
+连续急弯山区路、隧道、雨（雾）天、湿滑路、紧急情况处置；
+（二）小型汽车、小型自动挡汽车、残疾人专用小型自动挡载客汽车和低速载货汽车考试倒车入库、坡道定
+点停车和起步、侧方停车、曲线行驶、直角转弯；
+（三）三轮汽车、普通三轮摩托车、普通二轮摩托车和轻便摩托车考试桩考、坡道定点停车和起步、通过单
+边桥；
+　　（四）轮式自行机械车、无轨电车、有轨电车的考试内容由省级公安机关交通管理部门确定。
+二、合格标准
+科目二考试满分为100分，考试大型客车、牵引车、城市公交车、中型客车、大型货车准驾车型的，成绩达到90
+分的为合格，其他准驾车型的成绩达到80分的为合格；</li>
+	    		<li>18岁以上60岁以下的肢体健全，智力正常的人群。</li>
+	    		<li>全国</li>	
+	    	</ul>
+	    </div>
+</body>
+
+<script>
+
+sessionStorage.km = '2';
+
+	$(function(){
+		$(".content li").height($(window).height()-254)
+		$(".tabs li").click(function(){
+			var index=$(this).index();
+			$(".tabs li").removeClass().eq(index).addClass("on");
+			$(".content li").hide().eq(index).show()
+		})
+	})
+</script>
+</html>

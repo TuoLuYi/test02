@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.js" ></script>
+</head>
+<body>
+	<div class="wrap">
+		<!--顶部-->
+	    <div class="top_fixed">
+	    	<a href="javascript:window.history.back()" class="left_btn"><i>&#xe622;</i></a>
+	    	<h1>新增地址</h1>
+	    	<!--<input type="search" placeholder="请输入服务项目"/>
+	    	<i class="sr">&#xe620;</i>-->
+	    	<a href="javascript:;" class="right_btn">确定</a>
+	    </div>
+
+	  
+	    
+	    <div class="container login">
+	    	<form id="fm">
+	    		<div class="yhmm">
+	    			<label><i>&#xe657;</i></label><input type="text" name="admz" placeholder="请输入姓名"/> 
+	    		</div>
+	    		<div class="yhmm">
+	    			<label><i>&#xe63e;</i></label><input type="text" name="addh" placeholder="请输入联系电话"/> 
+	    		</div>
+	    		<div class="yhmm">
+	    			<label><i>&#xe605;</i></label><input type="text" name="addz" placeholder="请输入地址"/> 
+	    		</div>
+	    		<p class="ts">提示:地址请具体到门牌，否则影响服务对接!</p>
+	    		<div class="dl" style="margin-top:35px">
+	    			<a class="tjan" href="javascript:">确定</a>
+	    		</div>
+    	</form>
+	    </div>	 
+	    
+	    
+	</div>   
+     
+    <script type="text/javascript" src="/jx/back/custom/green/jquery.easyui.min.js"></script> 
+</body>
+ <script type="text/javascript">
+    		
+	    $('.tjan').on('click', function() {
+	    	
+	    	$('#fm').form('submit',{
+				url: "/jx/address/add.do",
+				onSubmit: function(){ 
+					 
+				},
+				success: function(result){ 
+					var ob = JSON.parse(result);//字符串转json
+				 
+					if (ob.code>0){
+						 alert("添加成功！")
+						 window.location.href="yylc1.html";
+					} else { 
+						 alert("添加 失败！")
+						 
+					}
+				}
+			});
+	    
+	    })
+    </script>
+</html>

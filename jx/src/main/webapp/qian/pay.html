@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-1.7.js" ></script>
+</head>
+<body>
+	<div class="wrap">
+		<!--顶部-->
+	    <div class="top_fixed">
+	    	<a href="javascript:window.history.back()" class="left_btn"><i>&#xe622;</i></a>
+	    	<h1>订单支付</h1>
+	    	<!--<input type="search" placeholder="请输入服务项目"/>
+	    	<i class="sr">&#xe620;</i>-->
+	    	<a href="javascript:;" class="right_btn hide">预约</a>
+	    </div>
+	    
+	  	    
+	    
+	    <!--底部-->
+	    <div class="footer">
+      	   <div class="foot_left">合计：￥<span>260</span>元</div>
+      	   <div class="foot_right"><a href="javascript:;" class="zfb">立即支付</a></div>
+        </div>
+       
+	    
+	    <div class="container pd">
+	    	 <div class="main">
+					   <div  class="gdxx_bd">
+					       <ul class="ddlist">
+						       <li>
+								  <div class="ddtitle">订单号<span class="grey">WJ85566866</span><span class="zj red hide">￥310元</span></div>
+									<ul  class="last">
+									  <li>
+											<ul class="ddtwo">
+												<li><label>服务项目：</label><span class="red">颈椎按摩护理</span></li>
+												<li><label>服务时长：</label><span class="hs">15分钟</span></li>
+												<li><label>服务人员：</label><span>董女士</span></li>
+										        <li><label>预约时间：</label><span class="red">2017-09-22 15:00</span></li>
+										        <li><label>联系客户：</label><span>王彦林</span></li>
+										        <li><label>联系电话：</label><span>15802456325</span></li>
+										        <li><label>联系地址：</label><span class="red">洪山区怡海花园八栋402</span></li>
+										        <li><label>备注信息：</label><span>来之前请提前电话联系</span></li>
+									     	</ul>
+			                            </li>
+									</ul>
+								</li>
+			                </ul>
+				     </div>
+				    
+				    
+				    <div class="dkq">
+			      	   <label>积分抵扣:<span>您当前积分1500,可抵扣<span class="red">150</span>元</span><input type="checkbox"/></label>
+			        </div>
+        
+				    <div class="zf hide">
+			    		<h3>支付方式：</h3>
+			    		<ul class="zf_list">
+			    			<li class="on"><i style="color:limegreen">&#xe60d;</i>微信支付</li>
+			    			<li class="hide"><i style="color:deepskyblue">&#xe65b;</i>支付宝</li>
+			    		</ul>
+			    	</div>
+			  </div>
+	    </div>
+
+       </div>
+</body>
+
+<script>
+	 $(function(){
+	 	$(".zf_list li").click(function(){
+      	 $(this).addClass("on").siblings().removeClass()
+    })
+	 	$(".zfb").click(function(){
+	 		 zz({"info":"您已下单成功！","txt1":"回到首页","txt2":"查看订单"})
+	 		 $(".btns a").click(function(){
+         	 	var index=$(this).index();
+         	 	if(index==0){
+         	 	   window.location.href="shops.html"
+         	    }else{
+         	    	window.location.href="caselist.html"
+         	    }
+         	 	$(".zz").remove()
+         	 })
+	 	})
+	 	
+	 	var v=$(".foot_left span").text()*1;
+	 	$(".dkq").click(function(){
+	 		if($(".dkq input").prop("checked")){
+	 			$(".foot_left span").text(v-$(".dkq .red").text()*1)
+	 		}else{
+	 			$(".foot_left span").text(v)
+	 		}
+	 	}) 
+	 })
+</script>
+</html>

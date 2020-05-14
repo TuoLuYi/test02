@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.dao.TeacherDao"> 
+
+ 	
+ 	<!-- 动态查询    -->
+ 	<select id="getList" parameterType="com.xx.bean.Teacher" resultType="com.xx.bean.Teacher">
+		select *from Teacher
+		<where> 
+			<if test="teid != null and teid != '' "> 
+				and teid = #{teid} 
+			</if> 
+			<if test="temz != null and temz != '' "> 
+				and temz = #{temz} 
+			</if> 
+			<if test="texb != null and texb != '' "> 
+				and texb = #{texb} 
+			</if> 
+			<if test="tejl != null and tejl != '' "> 
+				and tejl = #{tejl} 
+			</if> 
+			<if test="tejs != null and tejs != '' "> 
+				and tejs = #{tejs} 
+			</if> 
+			<if test="tedh != null and tedh != '' "> 
+				and tedh = #{tedh} 
+			</if> 
+			<if test="tezp != null and tezp != '' "> 
+				and tezp = #{tezp} 
+			</if> 
+			<if test="tefy != null and tefy != '' "> 
+				and tefy = #{tefy} 
+			</if> 
+			<if test="tezb != null and tezb != '' "> 
+				and tezb = #{tezb} 
+			</if> 
+			<if test="temm != null and temm != '' "> 
+				and temm = #{temm} 
+			</if> 
+		</where> 
+	</select> 
+  
+<update id="update" parameterType="com.xx.bean.Teacher">
+		 update Teacher 
+		<set>  
+			<if test="temz!=null and temz!='' "> 
+				temz = #{temz},  
+			</if>  
+			<if test="texb!=null and texb!='' "> 
+				texb = #{texb},  
+			</if>  
+			<if test="tejl!=null and tejl!='' "> 
+				tejl = #{tejl},  
+			</if>  
+			<if test="tejs!=null and tejs!='' "> 
+				tejs = #{tejs},  
+			</if>  
+			<if test="tedh!=null and tedh!='' "> 
+				tedh = #{tedh},  
+			</if>  
+			<if test="tezp!=null and tezp!='' "> 
+				tezp = #{tezp},  
+			</if>  
+			<if test="tefy!=null and tefy!='' "> 
+				tefy = #{tefy},  
+			</if>  
+			<if test="tezb!=null and tezb!='' "> 
+				tezb = #{tezb},  
+			</if>  
+			<if test="temm!=null and temm!='' "> 
+				temm = #{temm},  
+			</if>  
+		</set> 
+		 where teid = #{teid}
+	</update>
+</mapper>
+
+
